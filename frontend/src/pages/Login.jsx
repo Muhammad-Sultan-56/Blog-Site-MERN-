@@ -17,6 +17,7 @@ const Login = () => {
         justifyContent: "center",
         alignItems: "center",
         height: "100vh",
+        backgroundColor: "#edf5ff",
       }}
     >
       <Card title="Login" className="shadow-lg" style={{ width: 350 }}>

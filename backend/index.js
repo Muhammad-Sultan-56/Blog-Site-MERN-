@@ -2,8 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 const port = 3001;
-require("dotenv").config();
-
+const cors = require("cors");
 // ========= Routes
 const categoryRoute = require("./routes/CategoryRoutes");
 const postRouter = require("./routes/PostRoutes");
@@ -11,6 +10,18 @@ const userRoute = require("./routes/UserRoute");
 
 // ====== middlewares
 app.use(express.json());
+
+// serve static files like images/uploads folder
+app.use(express.static("uploads"));
+
+// cors request
+
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    methods: ['GET' , 'POST' , 'PUT' , 'DELETE']
+  })
+);
 
 app.use("/category", categoryRoute);
 
@@ -24,7 +35,7 @@ app.get("/", (req, res) => {
 
 // Connect to Database
 mongoose
-  .connect(process.env.DB_CONNECTION)
+  .connect("mongodb://127.0.0.1:27017/blog")
   .then(() => {
     app.listen(port, () => {
       console.log(`Database connected & app listening on port ${port}`);

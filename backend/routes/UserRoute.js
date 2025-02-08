@@ -2,8 +2,10 @@ const { signup, login } = require("../controllers/UserController");
 const express = require("express");
 const userRoute = express.Router();
 
-userRoute.post("/signup", signup);
+const upload = require("../helpers/ImageUpload");
 
-userRoute.post("/login" , login)
+userRoute.post("/signup", upload.single("image"), signup);
+
+userRoute.post("/login", login);
 
 module.exports = userRoute;

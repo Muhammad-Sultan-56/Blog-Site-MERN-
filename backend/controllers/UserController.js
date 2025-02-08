@@ -1,7 +1,6 @@
 const bcrypt = require("bcrypt");
-
+require("dotenv").config();
 const UserModal = require("../models/User");
-const token_key = "kjhkh7897biuw43*993#jjsdjhhs43dfger4345";
 const jwt = require("jsonwebtoken");
 //================== User Signup ==============//
 const signup = async (req, res) => {
@@ -11,19 +10,24 @@ const signup = async (req, res) => {
     //============ check email is already exist
     const chekEmail = await UserModal.findOne({ email: data.email });
     if (chekEmail != null) {
-      res.status(400).json({
+      return res.status(400).json({
         status: "Fail",
-        message: "Email is Already Registered",
+        error: "Email is Already Registered",
       });
     }
 
     // =============== password hashing
+    // hash the password
+    const hashed = bcrypt.hashSync(data.password, 10);
 
-    const password = bcrypt.hashSync(data.password, 10);
-    data.password = password;
+    const signupUser = await UserModal.create({
+      name: data.name,
+      email: data.email,
+      password: hashed,
+      image: req.file.filename,
+    });
 
-    const signupUser = await UserModal.create(data);
-    res.json({
+    return res.json({
       status: "Ok",
       message: "User signup successfully",
       user: signupUser,
@@ -72,9 +76,9 @@ const login = async (req, res) => {
     }
 
     // genereate jwt token
-    const token = jwt.sign({ id: user._id }, token_key);
+    const token = jwt.sign({ id: user._id }, process.env.JWT_KEY);
 
-    res.status(201).json({
+    return res.status(201).json({
       status: "Ok",
       message: "User Login Successfull",
       token: token,

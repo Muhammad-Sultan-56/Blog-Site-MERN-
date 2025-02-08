@@ -1,4 +1,3 @@
-const token_key = "kjhkh7897biuw43*993#jjsdjhhs43dfger4345";
 const jwt = require("jsonwebtoken");
 
 const AuthCheck = (req, res, next) => {
@@ -24,7 +23,7 @@ const AuthCheck = (req, res, next) => {
 
     // verify token is correct
 
-    const encoded = jwt.verify(token, token_key);
+    const encoded = jwt.verify(token, process.env.JWT_KEY);
     req.userId = encoded.id;
 
     next();
