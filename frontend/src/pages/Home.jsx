@@ -1,6 +1,8 @@
 import React from "react";
 import { Button, Card } from "antd";
-import { Link } from "react-router-dom";
+import Navbar from "../components/Navbar";
+import headerImage from "../assets/imgs/header.jpg";
+
 const blogs = [
   {
     id: 1,
@@ -37,32 +39,29 @@ const Home = () => {
         backgroundColor: "#edf5ff",
       }}
     >
-      {/* Navigation Bar */}
-      <nav className="flex justify-between items-center px-6 py-4 bg-white shadow-md">
-        <h1 className="text-2xl font-bold">Blog</h1>
-        <div>
-          <Link to="/" className="mr-4">
-            Home
-          </Link>
-          <Link to="/login" className="mr-4">
-            Login
-          </Link>
-          <Link to="/signup">Signup</Link>
-        </div>
+      <Navbar />
 
-        <div>
-          <Button type="primary" className="mr-2">
-            Login
-          </Button>
-          <Button type="default">Signup</Button>
-        </div>
-      </nav>
-      <div className="container px-15">
+      <header
+        style={{
+          minHeight: "75vh",
+          backgroundImage: `url(${headerImage})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+      ></header>
+
+      <div className="container p-6 px-12">
         <div className="min-h-screen">
           {/* Main Content */}
-          <div className=" mx-auto mt-15 flex gap-6">
+          <div className="my-6">
+            <h2 className="mb-1 text-3xl font-semibold">All Blogs</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+          </div>
+          <div className=" mx-auto flex gap-6">
             {/* Blog Posts */}
-            <div className="w-3/4 grid grid-cols-1 md:grid-cols-3 gap-6">
+
+            <div className="w-3/4 grid grid-cols-1 md:grid-cols-3 gap-5">
               {blogs.map((blog) => (
                 <Card
                   key={blog.id}

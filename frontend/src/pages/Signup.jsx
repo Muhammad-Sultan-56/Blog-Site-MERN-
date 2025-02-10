@@ -69,7 +69,7 @@ const Signup = () => {
         backgroundColor: "#edf5ff",
       }}
     >
-      <Card title="Signup" className="shadow-lg" style={{ width: 450 }}>
+      <Card title="Signup" className="shadow-lg" style={{ width: 550 }}>
         {errors.length > 0 && (
           <div className="bg-red-100 p-4 rounded mb-4">
             <h4 className="text-red-500 text-lg font-semibold">
@@ -91,28 +91,32 @@ const Signup = () => {
           onFinishFailed={onFinishFailed}
           layout="vertical"
         >
-          <Form.Item
-            label="Name"
-            name="name"
-            rules={[{ required: true, message: "Please enter your name!" }]}
-          >
-            <Input placeholder="Enter your name" />
-          </Form.Item>
-
-          <Form.Item
-            label="Email"
-            name="email"
-            rules={[
-              {
-                required: true,
-                message: "Please enter your email!",
-                type: "email",
-              },
-            ]}
-          >
-            <Input placeholder="Enter your email" />
-          </Form.Item>
-
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item
+                label="Name"
+                name="name"
+                rules={[{ required: true, message: "Please enter your name!" }]}
+              >
+                <Input placeholder="Enter your name" />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item
+                label="Email"
+                name="email"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please enter your email!",
+                    type: "email",
+                  },
+                ]}
+              >
+                <Input placeholder="Enter your email" />
+              </Form.Item>
+            </Col>
+          </Row>
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item
