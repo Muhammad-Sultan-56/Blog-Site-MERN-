@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Card } from "antd";
 import Navbar from "../components/Navbar";
 import headerImage from "../assets/imgs/header.jpg";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const blogs = [
   {
@@ -33,46 +35,64 @@ const categories = [
 ];
 
 const Home = () => {
+  const navigate = useNavigate();
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:3001/post/get").then((res) => {
+      console.log(res.data.posts);
+      setPosts(res.data.posts);
+    });
+  });
+
   return (
-    <div
-      style={{
-        backgroundColor: "#edf5ff",
-      }}
-    >
+    <div>
       <Navbar />
 
       <header
         style={{
           minHeight: "75vh",
-          backgroundImage: `url(${headerImage})`,
+          background: `linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.4)), url(${headerImage})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
         }}
-      ></header>
+        className="flex items-center justify-center"
+      >
+        <div className="flex flex-col w-1/2 p-4 gap-4 text-center text-white">
+          <h1 className="text-2xl md:text-4xl font-medium">
+            Welcome to My Blogs
+          </h1>
+          <p className="leading-6">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla
+            debitis natus tempora molestias perferendis quisquam nihil?
+          </p>
+        </div>
+      </header>
 
       <div className="container p-6 px-12">
         <div className="min-h-screen">
           {/* Main Content */}
           <div className="my-6">
-            <h2 className="mb-1 text-3xl font-semibold">All Blogs</h2>
+            <h2 className="mb-1 text-3xl font-semibold">Latest Posts</h2>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
           </div>
           <div className=" mx-auto flex gap-6">
             {/* Blog Posts */}
 
             <div className="w-3/4 grid grid-cols-1 md:grid-cols-3 gap-5">
-              {blogs.map((blog) => (
+              {posts.map((post) => (
                 <Card
-                  key={blog.id}
-                  cover={<img alt={blog.title} src={blog.image} />}
+                  onClick={() => navigate(`/post/${post._id}`)}
+                  key={post._id}
+                  cover={<img alt={post.title} src={post.image} />}
                   className="shadow-lg"
                 >
-                  <h2 className="text-xl font-semibold">{blog.title}</h2>
-                  <p className="text-gray-600">{blog.description}</p>
+                  <h2 className="text-xl font-semibold">{post.title}</h2>
+                  <p className="text-gray-600">{post.description}</p>
                   <div className="text-sm text-gray-500 mt-2">
                     <span>
-                      By {blog.author} • {blog.date}
+                      By {post.author} • {post.createdAt}
                     </span>
                   </div>
                   <Button type="link" className="mt-2">

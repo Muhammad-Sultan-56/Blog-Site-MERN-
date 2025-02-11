@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+require("dotenv").config();
 
 const PostSchema = mongoose.Schema(
   {
@@ -19,9 +20,12 @@ const PostSchema = mongoose.Schema(
       type: String,
       required: true,
       default: "post.jpg",
+      get: (value) => {
+        return "http://localhost:3001/" + value;
+      },
     },
   },
-  { timestamps: true }
+  { timestamps: true, toJSON: { getters: true }, toObject: { getters: true } }
 );
 
 const PostModel = mongoose.model("post", PostSchema);
