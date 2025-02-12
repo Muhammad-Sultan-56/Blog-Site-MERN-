@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar";
 import headerImage from "../assets/imgs/header.jpg";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Footer from "../components/Footer";
 
 const blogs = [
   {
@@ -119,6 +120,8 @@ const Home = () => {
           </div>
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 };

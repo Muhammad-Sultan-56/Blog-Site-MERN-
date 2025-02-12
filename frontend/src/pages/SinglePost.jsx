@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import PostImage from "../assets/imgs/header.jpg";
+import Footer from "../components/Footer";
 
 function SinglePost() {
   return (
@@ -34,6 +35,8 @@ function SinglePost() {
           distinctio voluptates.
         </p>
       </div>
+
+      <Footer />
     </div>
   );
 }
