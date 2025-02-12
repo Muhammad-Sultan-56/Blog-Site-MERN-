@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "antd";
-import { AuhtContext } from "../context/AuthContext";
+import { AuthContext } from "../context/AuthContext";
 
 function Navbar() {
   const navigate = useNavigate();
-  const AuthCtx = useContext(AuhtContext); // Get isLogin from context
+  const AuthCtx = useContext(AuthContext); // Get isLogin from context
 
   return (
     <>
@@ -31,7 +31,10 @@ function Navbar() {
               <Button
                 type="primary"
                 danger
-                onClick={() => console.log("Logout")}
+                onClick={() => {
+                  AuthCtx.logout();
+                  navigate("/login");
+                }}
               >
                 Logout
               </Button>

@@ -1,39 +1,49 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
-import PostImage from "../assets/imgs/header.jpg";
 import Footer from "../components/Footer";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 function SinglePost() {
+  const { id } = useParams();
+  const [post, setPost] = useState(null);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3001/post/single/${id}`)
+      .then((res) => {
+        setPost(res.data.post);
+      })
+      .catch((er) => {
+        console.error("Error fetching post:", er);
+      });
+  }, [id]); // ✅ Ensures re-fetching when `id` changes
+
+  if (!post) {
+    return <div className="text-center py-10">Loading...</div>; // ✅ Prevents errors while data is loading
+  }
+
   return (
     <div>
       <Navbar />
 
       <div className="my-5 px-10 sm:px-15 md:px-40">
-        <img src={PostImage} alt="Post Image" className="mb-3 rounded-lg" />
-        <div className="my-3 flex items-center text-gray-700  gap-10 px-2">
-          <span>Muhammad Sultan</span>
-          <span className="">04-05-2000</span>
+        <img
+          src={post.image}
+          alt="Post"
+          className="mb-3 rounded-lg object-cover"
+        />
+        <div className="my-3 flex items-center text-gray-700 gap-10 px-2">
+          <span>{post.authorId?.name || "Unknown Author"}</span>
+          <span>{new Date(post.createdAt).toLocaleDateString()}</span>
         </div>
         <h4 className="px-2 my-3 text-xl font-semibold text-gray-600">
           Category
         </h4>
-        <h2 className="md:text-3xl text-xl sm:text-2xl  font-medium">
-          This is Post Title to Check the Preview on Single Post Page....
+        <h2 className="md:text-3xl text-xl sm:text-2xl font-medium">
+          {post.title}
         </h2>
-        <p className="leading-6 my-4 text-justify">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero
-          recusandae fugiat vitae? Impedit deserunt velit laboriosam laudantium
-          hic iste enim, eaque qui reprehenderit? Qui iure vel deleniti ducimus!
-          Doloremque modi iste rerum, doloribus debitis possimus natus esse
-          nobis dicta delectus aspernatur? Facilis, neque? Aperiam soluta
-          expedita voluptatum nemo, distinctio voluptates. Lorem ipsum dolor sit
-          amet consectetur adipisicing elit. Vero recusandae fugiat vitae?
-          Impedit deserunt velit laboriosam laudantium hic iste enim, eaque qui
-          reprehenderit? Qui iure vel deleniti ducimus! Doloremque modi iste
-          rerum, doloribus debitis possimus natus esse nobis dicta delectus
-          aspernatur? Facilis, neque? Aperiam soluta expedita voluptatum nemo,
-          distinctio voluptates.
-        </p>
+        <p className="leading-6 my-4 text-justify">{post.description}</p>
       </div>
 
       <Footer />

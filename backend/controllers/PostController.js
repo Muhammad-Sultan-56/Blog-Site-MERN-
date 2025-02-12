@@ -45,10 +45,30 @@ const getAllPosts = async (req, res) => {
 const getSinglePost = async (req, res) => {
   try {
     const id = req.params.id;
-    const post = await PostModel.findById(id);
+    const post = await PostModel.findById(id).populate("authorId", "name");
     return res.json({
       status: "Ok",
       post: post,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.json({
+      status: "Failed",
+    });
+  }
+};
+
+//================== get posts by user  ===============//
+
+const getPostsByUser = async (req, res) => {
+  try {
+    const posts = await PostModel.find({ authorId: req.userId }).populate(
+      "authorId",
+      "name image"
+    );
+    return res.json({
+      status: "Ok",
+      post: posts,
     });
   } catch (error) {
     console.log(error);
@@ -104,4 +124,5 @@ module.exports = {
   getSinglePost,
   updatePost,
   deletePost,
+  getPostsByUser,
 };

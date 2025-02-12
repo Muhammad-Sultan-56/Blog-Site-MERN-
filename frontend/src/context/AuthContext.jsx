@@ -2,16 +2,22 @@ import { createContext, useState } from "react";
 
 // create context
 
-export const AuhtContext = createContext();
+export const AuthContext = createContext();
 
 // create Provider
 
 export const AuhtContextProvider = ({ children }) => {
+  const logout = () => {
+    setIsLogin(false);
+    setToken(null);
+  };
   const [isLogin, setIsLogin] = useState(false);
   const [token, setToken] = useState(null);
   return (
-    <AuhtContext.Provider value={{ isLogin, setIsLogin, token, setToken }}>
+    <AuthContext.Provider
+      value={{ isLogin, setIsLogin, token, setToken, logout }}
+    >
       {children}
-    </AuhtContext.Provider>
+    </AuthContext.Provider>
   );
 };

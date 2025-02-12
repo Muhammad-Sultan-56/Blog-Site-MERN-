@@ -11,6 +11,7 @@ const {
   getSinglePost,
   updatePost,
   deletePost,
+  getPostsByUser,
 } = require("../controllers/PostController");
 
 // creat post
@@ -21,6 +22,8 @@ postRouter.get("/get", getAllPosts);
 
 // get single post
 postRouter.get("/single/:id", getSinglePost);
+// get posts by users
+postRouter.get("/user", AuthCheck, getPostsByUser);
 
 // update post
 postRouter.put("/update/:id", updatePost);

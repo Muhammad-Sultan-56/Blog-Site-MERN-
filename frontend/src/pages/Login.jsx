@@ -3,14 +3,14 @@ import { Form, Input, Button, Card } from "antd";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { AuhtContext } from "../context/AuthContext";
+import { AuthContext } from "../context/AuthContext";
 
 const Login = () => {
   const [errors, setErrors] = useState([]);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const AuthCtx = useContext(AuhtContext);
+  const AuthCtx = useContext(AuthContext);
 
   // on submit form this function will run
   const onFinish = (values) => {

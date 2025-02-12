@@ -16,6 +16,10 @@ const PostSchema = mongoose.Schema(
       ref: "User",
       required: true,
     },
+    status: {
+      type: String,
+      default: "Draft",
+    },
     image: {
       type: String,
       required: true,

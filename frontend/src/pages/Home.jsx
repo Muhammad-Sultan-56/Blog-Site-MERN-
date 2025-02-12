@@ -44,7 +44,7 @@ const Home = () => {
       console.log(res.data.posts);
       setPosts(res.data.posts);
     });
-  });
+  }, []);
 
   return (
     <div>
