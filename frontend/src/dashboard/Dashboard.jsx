@@ -49,7 +49,15 @@ function Dashboard() {
 
           {/* Right Side: Posts Table */}
           <div className="md:col-span-2 bg-white p-5 shadow-md rounded-lg">
-            <h2 className="text-xl font-semibold mb-4">Your Posts</h2>
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-xl font-semibold mb-4">Your Posts</h2>
+              <button
+                onClick={() => navigate("/createpost")}
+                className="px-3 py-1 bg-blue-500 rounded-lg text-white "
+              >
+                Creat Post
+              </button>
+            </div>
             <div className="overflow-x-auto">
               <PostDataTable posts={posts} />
             </div>

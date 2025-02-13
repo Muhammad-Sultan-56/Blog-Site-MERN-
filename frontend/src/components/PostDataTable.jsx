@@ -39,7 +39,7 @@ function PostDataTable({ posts }) {
         </div>
       ),
       sortable: true,
-      style: { padding: "10px" }, // ✅ Added spacing
+      style: { padding: "5px" }, // ✅ Added spacing
     },
     {
       name: "Actions",
@@ -57,7 +57,7 @@ function PostDataTable({ posts }) {
         </div>
       ),
       sortable: true,
-      style: { padding: "10px", textAlign: "center" }, // ✅ Centering & spacing
+      style: { padding: "2px" }, // ✅ Centering & spacing
     },
   ];
 

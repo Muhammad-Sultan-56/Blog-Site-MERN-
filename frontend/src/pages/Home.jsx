@@ -90,7 +90,7 @@ const Home = () => {
                   className="shadow-lg"
                 >
                   <h2 className="text-xl font-semibold">{post.title}</h2>
-                  <p className="text-gray-600">{post.description}</p>
+                  <p className="text-gray-600">{post.excerpt}</p>
                   <div className="text-sm text-gray-500 mt-2">
                     <span>
                       By {post.author} • {post.createdAt}

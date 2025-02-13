@@ -43,7 +43,14 @@ function SinglePost() {
         <h2 className="md:text-3xl text-xl sm:text-2xl font-medium">
           {post.title}
         </h2>
-        <p className="leading-6 my-4 text-justify">{post.description}</p>
+
+        {/* Content */}
+        <div className="prose prose-lg max-w-none">
+          <p
+            dangerouslySetInnerHTML={{ __html: post && post.description }}
+            className="text-gray-600 mt-2"
+          ></p>
+        </div>
       </div>
 
       <Footer />

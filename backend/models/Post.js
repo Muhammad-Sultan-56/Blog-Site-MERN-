@@ -28,6 +28,18 @@ const PostSchema = mongoose.Schema(
         return "http://localhost:3001/" + value;
       },
     },
+    category: {
+      type: String,
+      default: "uncategorized",
+    },
+    status: {
+      type: String,
+      default: "Draft",
+    },
+    excerpt: {
+      type: String,
+      required: false,
+    },
   },
   { timestamps: true, toJSON: { getters: true }, toObject: { getters: true } }
 );
